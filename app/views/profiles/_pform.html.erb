@@ -1,0 +1,38 @@
+<!-- app/views/profiles/_form.html.erb -->
+<%= form_for(profile, html: { multipart: true }) do |f| %>
+  <% if profile.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(profile.errors.count, "error") %> prohibited this profile from being saved:</h2>
+
+      <ul>
+        <% profile.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :first_name %>
+    <%= f.text_field :first_name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :last_name %>
+    <%= f.text_field :last_name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :bio %>
+    <%= f.text_area :bio %>
+  </div>
+
+  <div class="field">
+    <%= f.label :avatar %>
+    <%= f.file_field :avatar %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit 'Save Profile' %>
+  </div>
+<% end %>

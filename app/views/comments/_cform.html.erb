@@ -1,0 +1,15 @@
+<!-- app/views/comments/_form.html.erb -->
+<%= form_for([@commentable, Comment.new]) do |f| %>
+  <% if current_user %>
+    <div class="field">
+      <%= f.label :content %>
+      <%= f.text_area :content %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit 'Add Comment' %>
+    </div>
+  <% else %>
+    <p>Please <%= link_to 'sign in', new_user_session_path %> to leave a comment.</p>
+  <% end %>
+<% end %>
