@@ -6,9 +6,16 @@
   <% @posts.each do |post| %>
     <%= render post %>
     <p>
-      <%= link_to "Show this post", post %>
+      <%= button_to "Show this post", post, class: 'btn btn-outline-warning' %>
     </p>
   <% end %>
 </div>
 
-<%= link_to "New post", new_post_path %>
+<%= button_to "New post", new_post_path, class: 'btn btn-primary' %>
+
+<% if user_signed_in? %>
+<%= current_user.email %>
+  <%= link_to "Logout", destroy_user_session_path, method: :delete %>
+<% end %>
+
+

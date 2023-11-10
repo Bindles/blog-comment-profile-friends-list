@@ -2,17 +2,17 @@ require "test_helper"
 
 class ProfilesControllerTest < ActionDispatch::IntegrationTest
   test "should get show" do
-    get profiles_show_url
+    get profile_url
     assert_response :success
   end
 
   test "should get edit" do
-    get profiles_edit_url
+    get edit_profile_url
     assert_response :success
   end
 
   test "should get pform" do
-    get profiles_pform_url
+    get _pform_profile_url
     assert_response :success
   end
 end

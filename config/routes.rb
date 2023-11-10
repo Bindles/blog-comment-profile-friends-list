@@ -1,7 +1,5 @@
+#routes
 Rails.application.routes.draw do
-  get 'profiles/show'
-  get 'profiles/edit'
-  get 'profiles/pform'
   # config/routes.rb
   root 'posts#index'
 
@@ -11,7 +9,7 @@ Rails.application.routes.draw do
     resources :comments
   end
 
-  resource :profile, only: [:show, :edit, :update]
+  resource :profile
 
   get "up" => "rails/health#show", as: :rails_health_check
 
