@@ -5,10 +5,18 @@ class PostsController < ApplicationController
   # GET /posts or /posts.json
   def index
     @posts = Post.all
+  #@view_comments = params[:view_comments].present? ? params[:view_comments].to_i : 0
+
   end
 
   # GET /posts/1 or /posts/1.json
   def show
+    @post = Post.find(params[:id])
+    @comments = @post.comments.all
+    @view_comments = params[:view_comments].present? ? params[:view_comments].to_i : 0
+    #@comment = @post.comment
+    @commentable = @post 
+    puts "Profile ID in the URL: #{params[:id]}"
   end
 
   # GET /posts/new

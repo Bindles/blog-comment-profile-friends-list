@@ -1,7 +1,14 @@
 <p style="color: green"><%= notice %></p>
 
+
 <h1>Posts</h1>
 
+
+
+<%#= link_to 'Hide Comments', root_path(@comment, view_comments: 0) unless @view_comments.zero? %>
+<%#= link_to 'Show Comments', root_path(@comment, view_comments: 1) if @view_comments.zero? %>
+
+<%# if @view_comments.nonzero? %>
 <div id="posts">
   <% @posts.each do |post| %>
     <%= render post %>
@@ -12,6 +19,10 @@
 </div>
 <%= link_to "New post", new_post_path %>
 <%= link_to "New post", new_post_path, class: 'btn btn-primary' %>
+<%# end %>
+
+
+
 
 <% if user_signed_in? %>
 <%= current_user.email %>

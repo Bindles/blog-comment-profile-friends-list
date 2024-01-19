@@ -1,4 +1,58 @@
 <!-- app/views/profiles/show.html.erb -->
+
+<!-- app/views/profiles/show.html.erb -->
+<h1><%= @profile.first_name %>'s Profile</h1>
+
+<p>
+  <strong>First Name:</strong>
+  <span id="first_name"><%= @profile.first_name %></span>
+  <%= link_to "Edit", "javascript:void(0)", class: "edit-link", data: { field: "first_name" } %>
+</p>
+
+<!-- Add similar sections for other attributes -->
+<script>
+// app/assets/javascripts/profiles.js
+document.addEventListener("DOMContentLoaded", function () {
+  const editLinks = document.querySelectorAll(".edit-link");
+
+  editLinks.forEach(function (link) {
+    link.addEventListener("click", function () {
+      const field = link.dataset.field;
+      const spanElement = document.getElementById(field);
+      const value = spanElement.innerText.trim();
+      const newValue = prompt(`Edit ${field}:`, value);
+
+      if (newValue !== null && newValue !== value) {
+        updateProfileAttribute(field, newValue);
+      }
+    });
+  });
+
+  function updateProfileAttribute(attribute, value) {
+    const profileId = <%= @profile.id %>; // Replace with your actual profile ID
+    const url = `/profiles/${profileId}`;
+
+    fetch(url, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRF-Token": Rails.csrfToken(),
+      },
+      body: JSON.stringify({ profile: { [attribute]: value } }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          document.getElementById(attribute).innerText = data.newValue;
+        } else {
+          alert("Failed to update profile attribute.");
+        }
+      })
+      .catch((error) => console.error("Error:", error));
+  }
+});
+</script>
+
 <h1>Your Profile</h1>
 <%= render "pform", profile: @profile %>
 

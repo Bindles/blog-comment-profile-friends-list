@@ -21,6 +21,7 @@ class CommentsController < ApplicationController
   end
 
   def find_commentable
+    
     if params[:post_id]
       Post.find(params[:post_id])
     elsif params[:comment_id]

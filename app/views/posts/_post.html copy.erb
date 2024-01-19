@@ -1,7 +1,5 @@
 <!-- app/views/posts/show.html.erb -->
 <div id="<%= dom_id post %>">
-<%= link_to "Show this post", post, class: 'btn btn-outline-warning' %>
-
   <p>
     <strong>Title:</strong>
     <%= post.title %>
@@ -17,27 +15,19 @@
     <%= post.user_id %>
     <%= User.find(1).email %>
     <%= User.find(post.user_id).email %>
-    <%= @current_user %><br>
-
-    <%= post.comments.inspect%><br>
-
-    <%= @comments.inspect%><br><br>
-
-    <% post.comments.each do |ins|%>
-      <%= ins.inspect %><br>
-    <% end%>
-
-    <%= render 'debcomment' %>
+    <%= @current_user %>
   </p>
 
+<%= link_to 'Hide Comments', root_path(@comment, view_comments: 0) unless @view_comments.zero? %>
+<%= link_to 'Show Comments', root_path(@comment, view_comments: 1) if @view_comments.zero? %>
+
+<% if @view_comments.nonzero? %>
 
 <!-- Render existing comments -->
 <h2>Comments</h2>
 
 <% if controller_name == 'posts' && action_name == 'show' %>
-  <%#= params.inspect %><br>
-  <%#= params[:id] %><br>
-  <%= post.comments.find_by(commentable_id: params[:id]).content %>
+  <%= post.comments.find(1).content %>
   <% if @comments.length <= 2 %>
     <% @comments.each do |comment| %>
     <br>
@@ -65,20 +55,7 @@
     </script>
   <% end %>
 
-<%#= link_to "Show this post", post(@comment, view_comments: 0), class: 'btn btn-outline-warning' %>
-<%#= link_to 'Hide Comments', root_path(@comment, view_comments: 0) unless @view_comments.zero? %>
-<%#= link_to 'Show Comments', root_path(@comment, view_comments: 1) if @view_comments.zero? %>
-<%= link_to 'Hide Comments', post_path(@post, view_comments: 0) unless @view_comments.zero? %>
-<%= link_to 'Show Comments', post_path(@post, view_comments: 1) if @view_comments.zero? %>
 
-<% if @view_comments.nonzero? %>
-  <!-- Render comments -->
-  <% @post.comments.each do |comment| %>
-    <!-- Render comment details -->
-  <% end %>
-<% end %>
-
-  <% if @view_comments.nonzero? %>
 
     <% @comments.each do |comment| %>
     <ul>
@@ -86,8 +63,7 @@
         <li><strong><%= attribute %>:</strong> <%= value %></li>
       <% end %>
     </ul>
-    <% end %>
-  <% end%>
+  <% end %>
 
 
     <% @comments.each do |comment| %>
