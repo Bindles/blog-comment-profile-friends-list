@@ -37,7 +37,7 @@
 <% if controller_name == 'posts' && action_name == 'show' %>
   <%#= params.inspect %><br>
   <%#= params[:id] %><br>
-  <%= post.comments.find_by(commentable_id: params[:id]).content %>
+  <%#= post.comments.find_by(commentable_id: params[:id]).content %>
   <% if @comments.length <= 2 %>
     <% @comments.each do |comment| %>
     <br>

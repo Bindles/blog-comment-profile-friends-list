@@ -8,6 +8,10 @@ class User < ApplicationRecord
   has_one :profile, dependent: :destroy
   after_create :create_associated_profile
 
+  
+  has_many :friendships
+  has_many :friends, through: :friendships
+
   private
 
     def create_associated_profile

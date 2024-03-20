@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     resources :comments
   end
   resource :profile
-  resources :friends, only: [:index, :create, :destroy]
+  resources :friends #, only: [:index, :create, :destroy]
 
   get '/profile/:id', to: 'profiles#show', as: 'profile_by_id'
   get '/profile/:username', to: 'profiles#show', as: 'profile_by_username'
